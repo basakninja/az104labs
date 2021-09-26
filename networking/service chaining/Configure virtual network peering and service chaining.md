@@ -1,3 +1,10 @@
+**Skills:**
+✅ create and configure virtual networks, including peering and service chaining \
+✅ configure user-defined network routes \
+✅ hub-spoke network topology
+
+
+![](image.png)
 # 1. Create a virtual network and subnets
 #### 1. Create resource group that will be contain hub-spoke vnets.
 ```bash
@@ -85,7 +92,7 @@ az network vnet peering create \
 --allow-gateway-transit \
 --allow-vnet-access
 ```
-#### 3. create route table
+#### 3. Сreate a route table for Spoke 1
 ```bash
 az network route-table create \
 --name $ROUTE_TABLE_SPOKE_1 \
@@ -93,7 +100,7 @@ az network route-table create \
 --disable-bgp-route-propagation false \
 --location $SPOKE_1_LOCATION
 ```
-#### 4. add custom route
+#### 4. Add custom route
 ```bash
 az network route-table route create \
 --route-table-name $ROUTE_TABLE_SPOKE_1 \
@@ -103,7 +110,7 @@ az network route-table route create \
 --next-hop-type VirtualAppliance \
 --next-hop-ip-address 10.0.0.4
 ```
-#### 5. create route table
+#### 5. Сreate a route table for Spoke 2
 ```bash
 az network route-table create \
 --name $ROUTE_TABLE_SPOKE_2 \
@@ -111,7 +118,7 @@ az network route-table create \
 --disable-bgp-route-propagation false \
 --location $SPOKE_2_LOCATION
 ```
-#### 6. add custom route
+#### 6. Add custom route
 ```bash
 az network route-table route create \
 --route-table-name $ROUTE_TABLE_SPOKE_2 \
@@ -238,7 +245,7 @@ ssh -t -o StrictHostKeyChecking=no $USER@$VM_2_NAME_PUBLIC_IP \
 'ping 10.1.0.4 -c 5'
 ```
 
-# Parameters
+# 6. Parameters
 ```bash
 RESOURCE_GROUP_VNETS=rg-vnets-eastus
 RESOURCE_GROUP_VMS=rg-vms-eastus
